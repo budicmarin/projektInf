@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Letovi</h1>
+<form method="POST">
+    <div class="form-group">
+        <label for="id_let">ID Leta</label>
+        <input type="number" class="form-control" id="id_let" name="id_let" required>
+    </div>
+    <div class="form-group">
+        <label for="id_odredište">ID Odredišta</label>
+        <input type="number" class="form-control" id="id_odredište" name="id_odredište" required>
+    </div>
+    <div class="form-group">
+        <label for="datumPolaska">Datum Polaska</label>
+        <input type="date" class="form-control" id="datumPolaska" name="datumPolaska" required>
+    </div>
+    <div class="form-group">
+        <label for="trajanjeLeta">Trajanje Leta (u minutama)</label>
+        <input type="number" class="form-control" id="trajanjeLeta" name="trajanjeLeta" required>
+    </div>
+    <div class="form-group">
+        <label for="duljinaLeta">Duljina Leta (u km)</label>
+        <input type="number" class="form-control" id="duljinaLeta" name="duljinaLeta" step="0.1" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Dodaj Let</button>
+</form>
+<h2 class="mt-4">Popis Letova</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID Leta</th>
+            <th>ID Odredišta</th>
+            <th>Datum Polaska</th>
+            <th>Trajanje Leta</th>
+            <th>Duljina Leta</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for let in letovi %}
+        <tr>
+            <td>{{ let.id_let }}</td>
+            <td>{{ let.id_odredište }}</td>
+            <td>{{ let.datumPolaska }}</td>
+            <td>{{ let.trajanjeLeta }}</td>
+            <td>{{ let.duljinaLeta }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Dobrodošli na Flight Tracker</h1>
+<p>Koristite navigaciju iznad za pregled i upravljanje letovima i destinacijama.</p>
+
+<h2>Letovi</h2>
+<ul>
+  {% for let in letovi %}
+    <li>{{ let.id_let }} - {{ let.datumPolaska }} - Trajanje: {{ let.trajanjeLeta }}h - Duljina: {{ let.duljinaLeta }}km</li>
+  {% endfor %}
+</ul>
+
+<h2>Destinacije</h2>
+<ul>
+  {% for odrediste in odredista %}
+    <li>{{ odrediste.nazivOdrredišta }} - {{ odrediste.državaOdredišta }}</li>
+  {% endfor %}
+</ul>
+{% endblock %}

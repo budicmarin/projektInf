@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Odredišta</h1>
+<form method="POST">
+    <div class="form-group">
+        <label for="id_Odredišta">ID Odredišta</label>
+        <input type="number" class="form-control" id="id_Odredišta" name="id_Odredišta" required>
+    </div>
+    <div class="form-group">
+        <label for="nazivOdrredišta">Naziv Odredišta</label>
+        <input type="text" class="form-control" id="nazivOdrredišta" name="nazivOdrredišta" required>
+    </div>
+    <div class="form-group">
+        <label for="državaOdredišta">Država Odredišta</label>
+        <input type="text" class="form-control" id="državaOdredišta" name="državaOdredišta" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Dodaj Odredište</button>
+</form>
+<h2 class="mt-4">Popis Odredišta</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID Odredišta</th>
+            <th>Naziv Odredišta</th>
+            <th>Država Odredišta</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for odrediste in odredista %}
+        <tr>
+            <td>{{ odrediste.id_Odredišta }}</td>
+            <td>{{ odrediste.nazivOdrredišta }}</td>
+            <td>{{ odrediste.drzavaOdredišta }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
