@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Uredi Let</h1>
+<form method="POST">
+    <div class="form-group">
+        <label for="id_let">ID Leta</label>
+        <input type="number" class="form-control" id="id_let" name="id_let" value="{{ let.id_let }}" readonly>
+    </div>
+    <div class="form-group">
+        <label for="id_odredište">ID Odredišta</label>
+        <input type="number" class="form-control" id="id_odredište" name="id_odredište" value="{{ let.id_odredište }}" required>
+    </div>
+    <div class="form-group">
+        <label for="datumPolaska">Datum Polaska</label>
+        <input type="date" class="form-control" id="datumPolaska" name="datumPolaska" value="{{ let.datumPolaska }}" required>
+    </div>
+    <div class="form-group">
+        <label for="trajanjeLeta">Trajanje Leta (u minutama)</label>
+        <input type="number" class="form-control" id="trajanjeLeta" name="trajanjeLeta" value="{{ let.trajanjeLeta }}" required>
+    </div>
+    <div class="form-group">
+        <label for="duljinaLeta">Duljina Leta (u km)</label>
+        <input type="number" class="form-control" id="duljinaLeta" name="duljinaLeta" value="{{ let.duljinaLeta }}" step="0.1" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Ažuriraj Let</button>
+</form>
+{% endblock %}

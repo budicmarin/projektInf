@@ -4,16 +4,26 @@
 <p>Koristite navigaciju iznad za pregled i upravljanje letovima i destinacijama.</p>
 
 <h2>Letovi</h2>
-<ul>
-  {% for let in letovi %}
-    <li>{{ let.id_let }} - {{ let.datumPolaska }} - Trajanje: {{ let.trajanjeLeta }}h - Duljina: {{ let.duljinaLeta }}km</li>
-  {% endfor %}
-</ul>
+    <ul>
+        {% for let in letovi %}
+            <li>{{ let.id_let }} - {{ let.datumPolaska }} - Trajanje: {{ let.trajanjeLeta }}h - Duljina: {{ let.duljinaLeta }}km
+                <a href="{{ url_for('edit_let', id_let=let.id_let) }}">Uredi</a>
+                <form action="/letovi/delete/{{ let.id_let }}" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-primary" >Obriši</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
 
-<h2>Destinacije</h2>
-<ul>
-  {% for odrediste in odredista %}
-    <li>{{ odrediste.nazivOdrredišta }} - {{ odrediste.državaOdredišta }}</li>
-  {% endfor %}
-</ul>
+    <h2>Destinacije</h2>
+    <ul>
+        {% for odrediste in odredista %}
+            <li>{{ odrediste.nazivOdrredišta }} - {{ odrediste.državaOdredišta }}
+                <a href="{{ url_for('edit_odrediste', id_odrediste=odrediste.id_Odredišta) }}">Uredi</a>
+                <form action="/odredista/delete/{{ odrediste.id_Odredišta }}" method="POST" style="display:inline;">
+                    <button type="submit" class="btn btn-primary" >Obriši</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
 {% endblock %}

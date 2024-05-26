@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for
-from pony.orm import Database, Required, db_session
+from pony.orm import Database, Required, db_session, select
 
 app = Flask(__name__)
 
@@ -41,6 +41,19 @@ def letovi():
     letovi = Let.select()[:]
     return render_template('letovi.html', letovi=letovi)
 
+@app.route('/letovi/edit/<int:id_let>', methods=['GET', 'POST'])
+@db_session
+def edit_let(id_let):
+    let = Let.get(id_let=id_let)
+    if request.method == 'POST':
+        data = request.form
+        let.id_odredište = int(data['id_odredište'])
+        let.datumPolaska = data['datumPolaska']
+        let.trajanjeLeta = int(data['trajanjeLeta'])
+        let.duljinaLeta = float(data['duljinaLeta'])
+        return redirect(url_for('letovi'))
+    return render_template('edit_let.html', let=let)
+
 @app.route('/odredista', methods=['GET', 'POST'])
 @db_session
 def odredista():
@@ -52,6 +65,32 @@ def odredista():
     odredista = Odredište.select()[:]
     return render_template('odredista.html', odredista=odredista)
 
+@app.route('/odredista/edit/<int:id_odrediste>', methods=['GET', 'POST'])
+@db_session
+def edit_odrediste(id_odrediste):
+    odrediste = Odredište.get(id_Odredišta=id_odrediste)
+    if request.method == 'POST':
+        data = request.form
+        odrediste.nazivOdrredišta = data['nazivOdrredišta']
+        odrediste.državaOdredišta = data['državaOdredišta']
+        return redirect(url_for('odredista'))
+    return render_template('edit_odrediste.html', odrediste=odrediste)
+
+@app.route('/letovi/delete/<int:id_let>', methods=['POST'])
+@db_session
+def delete_let(id_let):
+    let = Let.get(id_let=id_let)
+    if let:
+        let.delete()
+    return redirect(url_for('letovi'))
+
+@app.route('/odredista/delete/<int:id_odrediste>', methods=['POST'])
+@db_session
+def delete_odrediste(id_odrediste):
+    odrediste = Odredište.get(id_Odredišta=id_odrediste)
+    if odrediste:
+        odrediste.delete()
+    return redirect(url_for('odredista'))
 
 if __name__ == '__main__':
     app.run(debug=True)

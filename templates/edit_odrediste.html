@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Uredi Odredište</h1>
+<form method="POST">
+    <div class="form-group">
+        <label for="id_Odredišta">ID Odredišta</label>
+        <input type="number" class="form-control" id="id_Odredišta" name="id_Odredišta" value="{{ odrediste.id_Odredišta }}" readonly>
+    </div>
+    <div class="form-group">
+        <label for="nazivOdrredišta">Naziv Odredišta</label>
+        <input type="text" class="form-control" id="nazivOdrredišta" name="nazivOdrredišta" value="{{ odrediste.nazivOdrredišta }}" required>
+    </div>
+    <div class="form-group">
+        <label for="državaOdredišta">Država Odredišta</label>
+        <input type="text" class="form-control" id="državaOdredišta" name="državaOdredišta" value="{{ odrediste.državaOdredišta }}" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Ažuriraj Odredište</button>
+</form>
+{% endblock %}
