@@ -3,12 +3,12 @@
 <h1>Letovi</h1>
 <form method="POST">
     <div class="form-group">
-        <label for="id_let">ID Leta</label>
-        <input type="number" class="form-control" id="id_let" name="id_let" required>
-    </div>
-    <div class="form-group">
-        <label for="id_odredište">ID Odredišta</label>
-        <input type="number" class="form-control" id="id_odredište" name="id_odredište" required>
+        <label for="id_odredište">Odaberite Odredište</label>
+        <select class="form-control" id="id_odredište" name="id_odredište" required>
+            {% for odrediste in odredista %}
+                <option value="{{ odrediste.id_Odredišta }}">{{ odrediste.nazivOdrredišta }} ({{ odrediste.državaOdredišta }})</option>
+            {% endfor %}
+        </select>
     </div>
     <div class="form-group">
         <label for="datumPolaska">Datum Polaska</label>
@@ -29,7 +29,7 @@
     <thead>
         <tr>
             <th>ID Leta</th>
-            <th>ID Odredišta</th>
+            <th>Odredište</th>
             <th>Datum Polaska</th>
             <th>Trajanje Leta</th>
             <th>Duljina Leta</th>

@@ -7,8 +7,14 @@
         <input type="number" class="form-control" id="id_let" name="id_let" value="{{ let.id_let }}" readonly>
     </div>
     <div class="form-group">
-        <label for="id_odredište">ID Odredišta</label>
-        <input type="number" class="form-control" id="id_odredište" name="id_odredište" value="{{ let.id_odredište }}" required>
+        <label for="id_odredište">Odaberite Odredište</label>
+        <select class="form-control" id="id_odredište" name="id_odredište" required>
+            {% for odrediste in odredista %}
+                <option value="{{ odrediste.id_Odredišta }}" {% if odrediste.id_Odredišta == let.id_odredište %}selected{% endif %}>
+                    {{ odrediste.nazivOdrredišta }} ({{ odrediste.državaOdredišta }})
+                </option>
+            {% endfor %}
+        </select>
     </div>
     <div class="form-group">
         <label for="datumPolaska">Datum Polaska</label>

@@ -1,25 +1,29 @@
 from flask import Flask, render_template, request, redirect, url_for
-from pony.orm import Database, Required, db_session, select
+from pony.orm import Database, Required, db_session, select, PrimaryKey
 
 app = Flask(__name__)
 
 # Konfiguracija baze podataka
 db = Database()
-db.bind(provider='sqlite', filename='database.sqlite', create_db=True)
+db.bind(provider='sqlite', filename='new.sqlite', create_db=True)
+
 
 class Let(db.Entity):
-    id_let = Required(int, unique=True)
+    id_let = PrimaryKey(int, auto=True)
     id_odredište = Required(int)
     datumPolaska = Required(str)
     trajanjeLeta = Required(int)
     duljinaLeta = Required(float)
 
+
 class Odredište(db.Entity):
-    id_Odredišta = Required(int, unique=True)
+    id_Odredišta = PrimaryKey(int, auto=True)
     nazivOdrredišta = Required(str)
     državaOdredišta = Required(str)
 
+
 db.generate_mapping(create_tables=True)
+
 
 # Rute
 @app.route('/')
@@ -51,19 +55,24 @@ def index():
     letovi = letovi_query[:]
     odredista = odredista_query[:]
 
-    return render_template('index.html', letovi=letovi, odredista=odredista, sort_letovi=sort_letovi, sort_odredista=sort_odredista)
+    return render_template('index.html', letovi=letovi, odredista=odredista, sort_letovi=sort_letovi,
+                           sort_odredista=sort_odredista)
+
 
 @app.route('/letovi', methods=['GET', 'POST'])
 @db_session
 def letovi():
     if request.method == 'POST':
         data = request.form
-        Let(id_let=int(data['id_let']), id_odredište=int(data['id_odredište']),
+        Let(id_odredište=int(data['id_odredište']),
             datumPolaska=data['datumPolaska'], trajanjeLeta=int(data['trajanjeLeta']),
             duljinaLeta=float(data['duljinaLeta']))
         return redirect(url_for('letovi'))
+
+    odredista = Odredište.select()[:]
     letovi = Let.select()[:]
-    return render_template('letovi.html', letovi=letovi)
+    return render_template('letovi.html', letovi=letovi, odredista=odredista)
+
 
 @app.route('/letovi/edit/<int:id_let>', methods=['GET', 'POST'])
 @db_session
@@ -76,18 +85,22 @@ def edit_let(id_let):
         let.trajanjeLeta = int(data['trajanjeLeta'])
         let.duljinaLeta = float(data['duljinaLeta'])
         return redirect(url_for('letovi'))
-    return render_template('edit_let.html', let=let)
+
+    odredista = Odredište.select()[:]
+    return render_template('edit_let.html', let=let, odredista=odredista)
+
 
 @app.route('/odredista', methods=['GET', 'POST'])
 @db_session
 def odredista():
     if request.method == 'POST':
         data = request.form
-        Odredište(id_Odredišta=int(data['id_Odredišta']), nazivOdrredišta=data['nazivOdrredišta'],
+        Odredište(nazivOdrredišta=data['nazivOdrredišta'],
                   državaOdredišta=data['državaOdredišta'])
         return redirect(url_for('odredista'))
     odredista = Odredište.select()[:]
     return render_template('odredista.html', odredista=odredista)
+
 
 @app.route('/odredista/edit/<int:id_odrediste>', methods=['GET', 'POST'])
 @db_session
@@ -100,6 +113,7 @@ def edit_odrediste(id_odrediste):
         return redirect(url_for('odredista'))
     return render_template('edit_odrediste.html', odrediste=odrediste)
 
+
 @app.route('/letovi/delete/<int:id_let>', methods=['POST'])
 @db_session
 def delete_let(id_let):
@@ -108,6 +122,7 @@ def delete_let(id_let):
         let.delete()
     return redirect(url_for('letovi'))
 
+
 @app.route('/odredista/delete/<int:id_odrediste>', methods=['POST'])
 @db_session
 def delete_odrediste(id_odrediste):
@@ -115,6 +130,7 @@ def delete_odrediste(id_odrediste):
     if odrediste:
         odrediste.delete()
     return redirect(url_for('odredista'))
+
 
 if __name__ == '__main__':
     app.run(debug=True)
