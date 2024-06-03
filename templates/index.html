@@ -5,7 +5,8 @@
 
 <h2>Letovi</h2>
 <form method="GET" action="{{ url_for('index') }}">
-    <select name="sort_letovi" onchange="this.form.submit()">
+    <label for="sort_letovi">Sortiraj letove:</label>
+    <select id="sort_letovi" name="sort_letovi" onchange="this.form.submit()">
         <option value="id_let" {% if sort_letovi == 'id_let' %}selected{% endif %}>ID</option>
         <option value="datumPolaska" {% if sort_letovi == 'datumPolaska' %}selected{% endif %}>Datum</option>
         <option value="trajanjeLeta" {% if sort_letovi == 'trajanjeLeta' %}selected{% endif %}>Trajanje</option>
@@ -32,7 +33,8 @@
 
 <h2>Destinacije</h2>
 <form method="GET" action="{{ url_for('index') }}">
-    <select name="sort_odredista" onchange="this.form.submit()">
+    <label for="sort_odredista">Sortiraj destinacije:</label>
+    <select id="sort_odredista" name="sort_odredista" onchange="this.form.submit()">
         <option value="id_Odredišta" {% if sort_odredista == 'id_Odredišta' %}selected{% endif %}>ID</option>
         <option value="nazivOdrredišta" {% if sort_odredista == 'nazivOdrredišta' %}selected{% endif %}>Naziv</option>
         <option value="državaOdredišta" {% if sort_odredista == 'državaOdredišta' %}selected{% endif %}>Država</option>
