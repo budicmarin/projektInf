@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="database" uuid="ea9b75d7-d751-45c8-b115-bac199dcfbce">
+    <data-source source="LOCAL" name="database" uuid="95a8114f-91e6-4182-965e-9269556495fc">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\Users\korisnik\OneDrive\Radna površina\TFPU\6.semestar\Informacijski sustavi\projektInf\database.sqlite</jdbc-url>
-      <working-dir>$ProjectFileDir$</working-dir>
-    </data-source>
-    <data-source source="LOCAL" name="new_database.sqlite" uuid="e37ecd73-1d46-4262-ac53-8a48f7dc8ac8">
-      <driver-ref>sqlite.xerial</driver-ref>
-      <synchronize>true</synchronize>
-      <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$USER_HOME$/Downloads/new_database.sqlite</jdbc-url>
+      <jdbc-url>jdbc:sqlite:C:\Users\Marin\PycharmProjects\projektInf\database.sqlite</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
   </component>
