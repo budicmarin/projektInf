@@ -5,7 +5,7 @@ app = Flask(__name__)
 
 # Konfiguracija baze podataka
 db = Database()
-db.bind(provider='sqlite', filename='new.sqlite', create_db=True)
+db.bind(provider='sqlite', filename='databases.sqlite', create_db=True)
 
 
 class Let(db.Entity):
