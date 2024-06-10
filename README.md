@@ -22,3 +22,11 @@ cd ~/Downloads
 git clone https://github.com/budicmarin/projektInf
 cd projektInf
 ```
+Docker:
+```bash
+docker build -t flight .
+docker run -p 5000:5000 flight
+```
+
+### Pristup aplikaciji
+U pregledniku upišite http://localhost:5000 ili preko terminala možete taj isti link otvoriti.
